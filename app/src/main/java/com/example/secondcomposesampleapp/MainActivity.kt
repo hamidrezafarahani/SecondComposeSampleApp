@@ -4,7 +4,9 @@ import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -20,7 +22,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             SecondComposeSampleAppTheme {
-                App(modifier = Modifier.fillMaxSize(), name = "Android")
+                App(modifier = Modifier.fillMaxSize())
             }
         }
     }
@@ -30,22 +32,32 @@ class MainActivity : ComponentActivity() {
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     Surface(
         color = MaterialTheme.colorScheme.primary,
-        modifier = modifier.padding(2.dp)
+        modifier = modifier.padding(vertical = 2.dp, horizontal = 4.dp)
     ) {
-        Text(
-            text = "Hello $name!",
-            modifier = modifier.padding(8.dp)
-        )
+        Column(
+            modifier = modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+        ) {
+            Text(text = "Hello")
+            Text(
+                text = "$name!",
+            )
+        }
     }
 }
 
 @Composable
-fun App(modifier: Modifier = Modifier, name: String) {
+fun App(modifier: Modifier = Modifier, names: List<String> = listOf("Compose", "Android")) {
     Surface(
         modifier = modifier,
         color = MaterialTheme.colorScheme.background
     ) {
-        Greeting(name = name)
+        Column {
+            for (name in names) {
+                Greeting(name = name)
+            }
+        }
     }
 }
 
@@ -54,6 +66,6 @@ fun App(modifier: Modifier = Modifier, name: String) {
 @Composable
 fun GreetingPreview() {
     SecondComposeSampleAppTheme {
-        App(name = "Android")
+        App()
     }
 }
