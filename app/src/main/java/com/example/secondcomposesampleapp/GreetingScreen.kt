@@ -1,5 +1,6 @@
 package com.example.secondcomposesampleapp
 
+import android.content.res.Configuration
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
@@ -18,8 +19,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.coerceAtLeast
 import androidx.compose.ui.unit.dp
+import com.example.secondcomposesampleapp.ui.theme.SecondComposeSampleAppTheme
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
@@ -47,6 +51,9 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                 Text(text = "Hello")
                 Text(
                     text = "$name!",
+                    style = MaterialTheme.typography.headlineMedium.copy(
+                        fontWeight = FontWeight.ExtraBold
+                    )
                 )
             }
             ElevatedButton(onClick = { expanded = !expanded }) {
@@ -71,5 +78,14 @@ fun GreetingScreen(
                 Greeting(name = it)
             }
         }
+    }
+}
+
+@Preview("Light Mode", showBackground = true)
+@Preview("Dark Mode", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
+@Composable
+fun GreetingPreview() {
+    SecondComposeSampleAppTheme {
+        GreetingScreen()
     }
 }
