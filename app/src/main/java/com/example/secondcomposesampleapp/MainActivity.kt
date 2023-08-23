@@ -20,13 +20,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             SecondComposeSampleAppTheme {
-                // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colorScheme.background
-                ) {
-                    Greeting("Android")
-                }
+                App(modifier = Modifier.fillMaxSize(), name = "Android")
             }
         }
     }
@@ -45,11 +39,21 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     }
 }
 
+@Composable
+fun App(modifier: Modifier = Modifier, name: String) {
+    Surface(
+        modifier = modifier,
+        color = MaterialTheme.colorScheme.background
+    ) {
+        Greeting(name = name)
+    }
+}
+
 @Preview("Light Mode", showBackground = true)
 @Preview("Dark Mode", uiMode = Configuration.UI_MODE_NIGHT_YES, showBackground = true)
 @Composable
 fun GreetingPreview() {
     SecondComposeSampleAppTheme {
-        Greeting("Android")
+        App(name = "Android")
     }
 }
